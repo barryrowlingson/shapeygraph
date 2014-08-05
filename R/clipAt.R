@@ -1,14 +1,12 @@
-clip_height <- function(shapey, percentage, delta=1){
-    xmin=-delta
-    xmax=shapey$width + delta
-    ymin=-delta
-    ymax=shapey$height*perecntage/100
-    rclip = 0
+clip_height <- function(shapey, top, bottom=0, delta=1){
+    ymin = shapey$height * bottom/100
+    ymax = shapey$height * top/100
+    clip_horizontal(shapey, ymin, ymax, delta=delta)
 }
 
 clip_horizontal <- function(shapey, v1, v2, delta=1){
     xmin=-delta
-    xmax=shapey$width+delta
+    xmax=shapey$width + delta
     rect=list(x=c(xmin, xmax, xmax, xmin),
         y=c(v1,v1,v2,v2))
     polyclip(shapey$polys, rect, "intersect")
